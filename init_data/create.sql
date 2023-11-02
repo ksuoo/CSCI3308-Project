@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS recipes CASCADE;
+CREATE TABLE recipes(
+
+);
+
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE users(
+
+);

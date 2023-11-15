@@ -9,7 +9,7 @@ INSERT INTO recipes (Name, Rating, Ease_of_Prep, Prep_Time, Main_Ingredients) VA
 	('Spaghetti','5','Super Simple',15,'Noodles,Marinara Sauce'),
 	('Scones','5','Super Simple',45,'Wheat,Eggs,Baking Powder'),
 	('Pizza','5','Average',120,'Sausage,Cheese'),
-	('Stir-Fry','5','Fairly Easy',25,'Chicken,Rice'),
+	('Stir-Fry','5','Fairly Easy',30,'Chicken,Rice'),
 	('Rustic Italian Tortellini Soup','4','Hard',30,'Sausage,Noodles,Cheese'),
 	('Swedish Meatballs','4','Very Difficult',90,'Beef,Noodles,Eggs'),
 	('Barley Beef Skillet','5','Super Simple',25,'Beef'),

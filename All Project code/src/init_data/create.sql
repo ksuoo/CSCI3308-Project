@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS recipes CASCADE;
 CREATE TABLE recipes(
-    Name VARCHAR(100) CHARACTER SET,
-    Rating VARCHAR(10) CHARACTER SET,
-    Ease_of_Prep VARCHAR(14) CHARACTER SET,
-    Prep_Time VARCHAR(10) CHARACTER SET,
-    Main_Ingredients VARCHAR(100) CHARACTER SET
+    Name VARCHAR(100),
+    Rating VARCHAR(10),
+    Ease_of_Prep VARCHAR(14),
+    Prep_Time VARCHAR(10),
+    Main_Ingredients VARCHAR(100)
 );
 
 DROP TABLE IF EXISTS users CASCADE;

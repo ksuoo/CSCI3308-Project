@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS recipes CASCADE;
 CREATE TABLE recipes(
     Name VARCHAR(100) CHARACTER SET,
-    Rating INT,
+    Rating VARCHAR(10) CHARACTER SET,
     Ease_of_Prep VARCHAR(14) CHARACTER SET,
-    Prep_Time INT,
+    Prep_Time VARCHAR(10) CHARACTER SET,
     Main_Ingredients VARCHAR(100) CHARACTER SET
 );
 

@@ -89,10 +89,13 @@ app.post("/register", async (req, res) => {
     // To-DO: Insert username and hashed password into 'users' table
     db.query(query, [username, hash])
     .then(() => {
-      res.json({ status: 'Success', message: 'Success'});
+      res.redirect("/login");
+      // res.json({ status: 'Success', message: 'Success'});
+
     })
     .catch((error) => {
-      res.json({ status: 'Invalid input', message: 'Invalid input'});
+      res.redirect("/register");
+      // res.json({ status: 'Invalid input', message: 'Invalid input'});
     });
   });
 
@@ -108,23 +111,30 @@ app.post("/login", async (req, res) => {
     const data = await db.query(query, username);
     
     if(data.length === 0){
-      res.json({ status: 'Invalid input', message: 'Invalid input'});
-      return;
+      return res.redirect("/register");
+      return res.json({ status: 'Invalid input', message: 'Invalid input'});
     }
     user = data[0];
     // check if password from request matches with password in DB
     const match = await bcrypt.compare(req.body.password, user.password);
     if (!match){
-      res.json({ status: 'Invalid input', message: 'Invalid input'});
-      return;
+      return res.render("pages/login", {
+        message: "Incorrect username or passord.",
+      });
+      // return res.json({ status: 'Invalid input', message: 'Invalid input'});
+      
     }
     //save user details in session like in lab 8
     req.session.user = user;
     req.session.save();
-    res.json({ status: 'Success', message: 'Success'});
+    res.redirect("/discover");
+    // res.json({ status: 'Success', message: 'Success'});
   } 
   catch(error){
-    res.json({ status: 'Invalid input', message: 'Invalid input'});
+    res.render("pages/register", {
+      message: "Database request failed.",
+    });
+    // res.json({ status: 'Invalid input', message: 'Invalid input'});
   }
   });
 

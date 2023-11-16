@@ -127,7 +127,7 @@ app.post("/login", async (req, res) => {
     //save user details in session like in lab 8
     req.session.user = user;
     req.session.save();
-    res.redirect("/discover");
+    res.redirect("/home");
     // res.json({ status: 'Success', message: 'Success'});
   } 
   catch(error){
@@ -138,6 +138,9 @@ app.post("/login", async (req, res) => {
   }
   });
 
+app.get("/about", (req, res) => {
+    res.render("pages/about");
+  });
 
 // Authentication Middleware.
 const auth = (req, res, next) => {
@@ -152,6 +155,13 @@ const auth = (req, res, next) => {
 // Authentication Required
 app.use(auth);
 
+app.get("/home", (req, res) => {
+  res.render("pages/home");
+});
+
+app.get("/profile", (req, res) => {
+  res.render("pages/profile");
+});
 
 // Logout
 app.get("/logout", (req, res) => {

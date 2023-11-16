@@ -80,15 +80,19 @@ app.post("/register", async (req, res) => {
     //hash the password using bcrypt library
     const hash = await bcrypt.hash(req.body.password, 10);
     const username = req.body.name;
+    if (username === ''){
+      res.json({ status: 'Invalid input', message: 'Invalid input'});
+      return;
+    }
     const query = 'insert into users(username, password) values ($1, $2);';
   
     // To-DO: Insert username and hashed password into 'users' table
     db.query(query, [username, hash])
     .then(() => {
-      res.redirect("/login");
+      res.json({ status: 'Success', message: 'Success'});
     })
     .catch((error) => {
-      res.redirect("/register");
+      res.json({ status: 'Invalid input', message: 'Invalid input'});
     });
   });
 
@@ -104,25 +108,23 @@ app.post("/login", async (req, res) => {
     const data = await db.query(query, username);
     
     if(data.length === 0){
-      return res.redirect("/register");
+      res.json({ status: 'Invalid input', message: 'Invalid input'});
+      return;
     }
     user = data[0];
     // check if password from request matches with password in DB
     const match = await bcrypt.compare(req.body.password, user.password);
     if (!match){
-      return res.render("pages/login", {
-        message: "Incorrect username or passord.",
-      });
+      res.json({ status: 'Invalid input', message: 'Invalid input'});
+      return;
     }
     //save user details in session like in lab 8
     req.session.user = user;
     req.session.save();
-    res.redirect("/discover");
+    res.json({ status: 'Success', message: 'Success'});
   } 
   catch(error){
-    res.render("pages/register", {
-      message: "Database request failed.",
-    });
+    res.json({ status: 'Invalid input', message: 'Invalid input'});
   }
   });
 

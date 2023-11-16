@@ -34,6 +34,7 @@ it('positive : /register', done => {
       .send({name: 'John Doe', password: 'test'})
       .end((err, res) => {
         expect(res).to.have.status(200);
+        expect(res.body.status).to.equals('Success');
         done();
       });
   });
@@ -43,9 +44,10 @@ it('Negative : /register. Checking invalid name', done => {
     chai
       .request(server)
       .post('/register')
-      .send({name: 10, password: 'test1'})
+      .send({name:'', password: 'test1'})
       .end((err, res) => {
         expect(res).to.have.status(200);
+        expect(res.body.message).to.equals('Invalid input');
         done();
       });
   });
@@ -58,6 +60,7 @@ it('Negative : /register. Checking invalid name', done => {
       .send({name: 'John Doe', password: 'test'})
       .end((err, res) => {
         expect(res).to.have.status(200);
+        expect(res.body.status).to.equals('Success');
         done();
       });
   });
@@ -66,9 +69,10 @@ it('Negative : /register. Checking invalid name', done => {
     chai
       .request(server)
       .post('/register')
-      .send({name: 'does not exist', password: 'dne'})
+      .send({name: '', password: ''})
       .end((err, res) => {
         expect(res).to.have.status(200);
+        expect(res.body.message).to.equals('Invalid input');
         done();
       });
   });

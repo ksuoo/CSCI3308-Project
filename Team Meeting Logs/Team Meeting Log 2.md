@@ -21,10 +21,12 @@ Kaile
 3. Fix user stories
 
 Charan 
-1. Make the tables for the SQL 
+1. Make the tables for the SQL
+
 Zach
 1. The logo was being weird but will meet in recitation with the TA
-2. Help the rest of the group workout their code and bugfix 
+2. Help the rest of the group workout their code and bugfix
+
 Bianca 
 1. Create SQl query w/ filter buttons
 

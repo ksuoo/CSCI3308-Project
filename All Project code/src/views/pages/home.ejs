@@ -1,0 +1,105 @@
+<%- include ('../partials/header') %> 
+<%- include ('../partials/menu') %>
+
+<main>
+    <tittle></tittle>
+    <div class="col"><%- include ('../partials/message') %></div>
+    
+   <!-- Create a row of drop-downs -->
+   <!-- <div class="container">
+    <div class="row">
+      <div class="col">
+         Dropdown 1 -->
+        <!-- <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Difficulty
+          </button>
+          <ul class="dropdown-menu" id="difficultyDropdown">
+            <li><a class="dropdown-item" href="#">Super Simple</a></li>
+            <li><a class="dropdown-item" href="#">Fairly Easy</a></li>
+            <li><a class="dropdown-item" href="#">Average</a></li>
+            <li><a class="dropdown-item" href="#">Hard</a></li>
+            <li><a class="dropdown-item" href="#">Very Difficult</a></li>
+          </ul>
+        </div>
+        </div>
+        <div class="col"> -->
+      <!-- Dropdown 2 -->
+        <!-- <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Time
+          </button>
+          <ul class="dropdown-menu" id="durationDropdown">
+            <li><a class="dropdown-item" href="#">0- 20 min</a></li>
+            <li><a class="dropdown-item" href="#">21 - 40 min </a></li>
+            <li><a class="dropdown-item" href="#">41 - 60 min</a></li>
+            <li><a class="dropdown-item" href="#">61 - 80 min</a></li>
+            <li><a class="dropdown-item" href="#">80+ min</a></li>
+          </ul>
+        </div>
+        </div>
+        <div class="col"> --> 
+        <!-- Form with a submit button -->
+        <form action="/getRecipe" method="get">
+          <!--difficulty dropdown-->
+          <div class="row">
+            <div class="col">
+              <select name="difficulty" id="difficulty">
+                <option value="Super Simple">Super Simple</option>
+                <option value="Fairly Easy">Fairly Easy</option>
+                <option value="Average">Average</option>
+                <option value="Hard">Hard</option>
+                <option value="Very Difficult">Very Difficult</option>
+              </select>
+          <!-- time dropdown
+          <div class="col"> 
+            <select name="time" id="time"></select>
+            <option value="0- 20 ">0- 20 min</option>
+              <option value="21- 40">21- 40 min</option>
+              <option value="41- 60">41- 60 min</option>
+              <option value="61- 80">61- 80 min</option>
+              <option value="80+">80+ min</option>
+          </select>  -->
+          <!-- You can set the action and method attributes based on your server-side handling -->
+          <input class="btn btn-primary" type="submit" value="Submit" /> 
+      </form>
+  
+    </div>
+     <!-- Add your table here -->
+     <%if(recipes.length !== 0){%>
+      <table id="myTable">
+       <!-- Add your table headers here -->
+       <thead>
+           <tr>
+               <th>Name</th>
+               <th>Rating</th>
+               <th>Difficulty</th>
+               <th>Prep Time</th>
+               <th>Main Ingredients</th>
+           </tr>
+       </thead>
+       <!-- Add your table body here -->
+       <tbody>
+           <!-- Add your table rows and data here using server-side rendering -->
+           <% recipes.forEach(recipe => { %>
+           <tr>
+             <td><%= recipe.name %></td>
+             <td><%= recipe.rating %></td>
+             <td><%= recipe.ease_of_prep %></td>
+             <td><%= recipe.prep_time %></td>
+             <td><%= recipe.main_ingredients %></td>
+             <!--Recipie acitons can be put here -->
+           <% }) %>
+   
+       </tbody>
+   </table>
+
+     <% } %>
+
+
+
+
+
+</main>
+
+<%- include ('../partials/footer') %>

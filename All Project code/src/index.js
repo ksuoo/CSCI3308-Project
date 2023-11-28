@@ -61,6 +61,11 @@ app.use(
 // <!-- Section 4 : API Routes -->
 // *****************************************************
 
+//this is new from lab 11 
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+});
+
 // TODO - Include your API routes here
 
 app.get("/", (req, res) => {
@@ -92,6 +97,8 @@ app.get("/login", (req, res) => {
     res.render("pages/login");
   });
 
+
+
 app.post("/login", async (req, res) => {
   const username = req.body.name;
   const query = 'select * from users where username = $1';
@@ -113,8 +120,11 @@ app.post("/login", async (req, res) => {
     //save user details in session like in lab 8
     req.session.user = user;
     req.session.save();
-    res.redirect("/discover");
+    res.redirect("/home");
   } 
+
+  
+
   catch(error){
     res.render("pages/register", {
       message: "Database request failed.",
@@ -136,6 +146,47 @@ const auth = (req, res, next) => {
 // Authentication Required
 app.use(auth);
 
+// I needed to edit the home get so that it can get the users inputs 
+app.get("/home", (req,res) => {
+  res.render("pages/home", {
+    recipes: []
+  });
+});  
+
+// I needed to edit the home get so that it can get the users inputs 
+app.get("/getRecipe", (req,res) => {
+  const difficulty = req.query.difficulty;
+  //const time = req.query.time;
+  const query = `
+  SELECT
+    *
+  FROM recipes
+  WHERE recipes.Ease_of_Prep = '${difficulty}';`;
+        //SELECT
+  //   recipes.Ease_of_Prep,
+  //   recipes.Prep_Time
+  // FROM recipes
+  // WHERE recipes.Ease_of_Prep = ${difficulty} 
+  //       recipes.Ease_of_Prep = ${time}`;
+
+   // Query to list all the recipies selected ... maybe
+   db.any(query)
+    .then((recipes) => {
+      console.log(recipes)
+      res.render("pages/home", {
+        // action: req.query,
+        recipes
+      });
+    })
+    .catch((err) => {
+      res.render("pages/home", {
+        recipes: []
+      });
+    });
+}); 
+
+
+
 
 // Logout
 app.get("/logout", (req, res) => {
@@ -145,10 +196,12 @@ app.get("/logout", (req, res) => {
     });
   });
 
+// i think this is the part to get the table loading 
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
 // starting the server and keeping the connection open to listen for more requests
-app.listen(3000);
+//app.listen(3000); changed becasue lab 11 said so
+module.exports = app.listen(3000);
 console.log('Server is listening on port 3000');

@@ -171,6 +171,35 @@ app.get("/logout", (req, res) => {
     });
   });
 
+app.get("/filter", (req, res) => {
+  var query = 'select * from recipes where';
+  var morethanone = false;
+
+  if (req.body.rating != null){
+    query += ` rating = ` + "\'" + req.body.rating + "\'";
+    morethanone = true;
+  }
+  if (req.body.difficulty != null){
+    query += morethanone ? ' AND difficulty = \'' + req.body.difficulty + '\'' : ' difficulty = \''  + req.body.difficulty + '\'';
+    morethanone = true;
+  }
+  if (req.body.time != null){
+    query += morethanone ? ' AND time = \'' + req.body.time + '\'' : ' time = \'' + req.body.time + '\'';
+    morethanone = true;
+  }
+  query = query + ';';
+
+  db.task('get-everything', task => {
+    return task.batch([task.any(query)]);
+  })
+    .then(data => {
+      
+    })
+    .catch(err => {
+
+    });
+});
+
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->

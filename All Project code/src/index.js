@@ -64,7 +64,7 @@ app.use(
 // TODO - Include your API routes here
 
 app.get("/", (req, res) => {
-    res.redirect("/login");
+    res.redirect("/home");
   });
 
 app.get('/welcome', (req, res) => {

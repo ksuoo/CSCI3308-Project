@@ -162,34 +162,36 @@ app.get("/profile", (req, res) => {
   res.render("pages/profile");
 });
 
-  app.get("/discover", (req, res) => {
-    axios({
-      url: `https://api.spoonacular.com/recipes/complexSearch?apiKey=a3d9272b711946149fef322a71c8343f`,
-      method: 'GET',
-      dataType: 'json',
-      headers: {
-        'Accept-Encoding': 'application/json',
-      },
-      params: {
-        apikey: process.env.API_KEY,
-        query: "pasta", 
-        size: 10// you can choose the number of events you would like to return
-      },
-    })
-      .then(results => {
-        console.log(results.data.results); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
-        res.render("pages/filter",{
-          results : results.data.results
-        });
-      })
-      .catch(error => {
-        // Handle errors
-        res.render("pages/filter",{
-          message: "No recipes matched your search",
-          results: [],
-        });
+app.get("/discover", (req, res) => {
+  axios({
+    url: `https://api.spoonacular.com/recipes/complexSearch?apiKey=a3d9272b711946149fef322a71c8343f`,
+    method: 'GET',
+    dataType: 'json',
+    headers: {
+      'Accept-Encoding': 'application/json',
+    },
+    params: {
+      apikey: process.env.API_KEY,
+      query: req.body.query,
+      cuisine: req.body.cusine,
+      type: req.body.type,
+      size: 10// you can choose the number of events you would like to return
+    },
+  })
+    .then(results => {
+      console.log(results.data.results); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+      res.render("pages/filter",{
+        results : results.data.results
       });
-  });
+    })
+    .catch(error => {
+      // Handle errors
+      res.render("pages/filter",{
+        message: "No recipes matched your search",
+        results: [],
+      });
+    });
+});
 
 // Logout
 app.get("/logout", (req, res) => {

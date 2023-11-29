@@ -3,22 +3,24 @@
 <%- include ('../partials/message') %>
 
 <main>
+  <br><br>
     <div class="container">
-      <!-- THE REST OF YOUR HTML CODE GOES HERE -->
-      <form action="/register" method="POST">
-        <div class ="mb-3">
-          <label for="username">Username</label>
-          <input class="form-control" type="text" id="name" name="name" />
-        </div>
-        <div class ="mb-3">
-            <label for="password">Password</label>
-            <input class="form-control" type="password" id="password" name="password" />
-        </div>
-        <div>
-          Already have an account? <a href="/login">Login</a>
-        </div>
-          <input class="btn btn-primary" type="submit" value="Register" /> 
-        </form>
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="form-group col-md-4">
+              <form action="/login" method="POST">
+                  <div class="mb-3">
+                      <input class="form-control" type="text" autofocus autocomplete="off" id="name" name="name" placeholder="Username" required/>
+                  </div>
+                  <div class="mb-3">
+                      <input class="form-control" type="password" id="password" name="password" placeholder="Password" required />
+                  </div>
+                  <div class="text-center mb-3">
+                      <input type="submit" id="register" value="Register" class="btn btn-primary px-5"/>
+                  </div>
+                  <p class="text-center"> Already have an account? <a href="/login"class="fw-6">Login</a></p>
+              </form>
+          </div>
     </div>
   </main>
 

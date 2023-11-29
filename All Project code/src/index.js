@@ -112,7 +112,7 @@ app.post("/login", async (req, res) => {
     
     if(data.length === 0){
       return res.redirect("/register");
-      return res.json({ status: 'Invalid input', message: 'Invalid input'});
+      // return res.json({ status: 'Invalid input', message: 'Invalid input'});
     }
     user = data[0];
     // check if password from request matches with password in DB
@@ -127,7 +127,7 @@ app.post("/login", async (req, res) => {
     //save user details in session like in lab 8
     req.session.user = user;
     req.session.save();
-    res.redirect("/home");
+    res.redirect("/discover");
     // res.json({ status: 'Success', message: 'Success'});
   } 
   catch(error){
@@ -151,7 +151,6 @@ const auth = (req, res, next) => {
     next();
   };
 
-  
 // Authentication Required
 app.use(auth);
 
@@ -163,41 +162,41 @@ app.get("/profile", (req, res) => {
   res.render("pages/profile");
 });
 
-// Logout
-app.get("/logout", (req, res) => {
-    req.session.destroy();
-    res.render("pages/login", {
-      message: "Logged out Successfully",
-    });
+  app.get("/discover", (req, res) => {
+    axios({
+      url: `https://api.spoonacular.com/recipes/complexSearch?apiKey=a3d9272b711946149fef322a71c8343f`,
+      method: 'GET',
+      dataType: 'json',
+      headers: {
+        'Accept-Encoding': 'application/json',
+      },
+      params: {
+        apikey: process.env.API_KEY,
+        query: "pasta", 
+        size: 10// you can choose the number of events you would like to return
+      },
+    })
+      .then(results => {
+        console.log(results.data.results); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+        res.render("pages/filter",{
+          results : results.data.results
+        });
+      })
+      .catch(error => {
+        // Handle errors
+        res.render("pages/filter",{
+          message: "No recipes matched your search",
+          results: [],
+        });
+      });
   });
 
-app.get("/filter", (req, res) => {
-  var query = 'select * from recipes where';
-  var morethanone = false;
-
-  if (req.body.rating != null){
-    query += ` rating = ` + "\'" + req.body.rating + "\'";
-    morethanone = true;
-  }
-  if (req.body.difficulty != null){
-    query += morethanone ? ' AND difficulty = \'' + req.body.difficulty + '\'' : ' difficulty = \''  + req.body.difficulty + '\'';
-    morethanone = true;
-  }
-  if (req.body.time != null){
-    query += morethanone ? ' AND time = \'' + req.body.time + '\'' : ' time = \'' + req.body.time + '\'';
-    morethanone = true;
-  }
-  query = query + ';';
-
-  db.task('get-everything', task => {
-    return task.batch([task.any(query)]);
-  })
-    .then(data => {
-      
-    })
-    .catch(err => {
-
-    });
+// Logout
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.render("pages/login", {
+    message: "Logged out Successfully",
+  });
 });
 
 

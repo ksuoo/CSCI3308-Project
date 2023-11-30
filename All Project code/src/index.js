@@ -173,7 +173,7 @@ app.get("/discover", (req, res) => {
     params: {
       apikey: process.env.API_KEY,
       query: req.body.query,
-      cuisine: req.body.cusine,
+      cuisine: req.body.cuisine,
       type: req.body.type,
       size: 10// you can choose the number of events you would like to return
     },

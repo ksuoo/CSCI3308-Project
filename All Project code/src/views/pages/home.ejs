@@ -3,12 +3,82 @@
 <%- include ('../partials/message') %>
 
 <main>
+    <br><br>
     <div class="container">
         <form action="/discover" method="GET">
             <div class="mb-3">
                 <input class="form-control" type="text" autofocus autocomplete="off" id="query" name="query" placeholder="Keyword" required/>
             </div>
-              <input type="submit" id="Search" value="Search Recipes" class="btn btn-primary"/>
+            <div>
+                <label for="cuisine">Select a Cuisine:</label>
+                <select id="cuisine" name="cuisine">
+                    <option value="">---</option>
+                    <option value="african">African</option>
+                    <option value="asian">Asian</option>
+                    <option value="american">American</option>
+                    <option value="british">British</option>
+                    <option value="cajun">Cajun</option>
+                    <option value="caribbean">Caribbean</option>
+                    <option value="chinese">Chinese</option>
+                    <option value="easterneuropean">Eastern European</option>
+                    <option value="european">European</option>
+                    <option value="french">French</option>
+                    <option value="german">German</option>
+                    <option value="greek">Greek</option>
+                    <option value="indian">Indian</option>
+                    <option value="irish">Irish</option>
+                    <option value="italian">Italian</option>
+                    <option value="japanese">Japanese</option>
+                    <option value="jewish">Jewish</option>
+                    <option value="korean">Korean</option>
+                    <option value="latinamerican">Latin American</option>
+                    <option value="mediterranean">Mediterranean</option>
+                    <option value="mexican">Mexican</option>
+                    <option value="middleeastern">Middle Eastern</option>
+                    <option value="nordic">Nordic</option>
+                    <option value="southern">Southern</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="thai">Thai</option>
+                    <option value="vietnamese">Vietnamese</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="type">Select a Dish Type:</label>
+                <select id="type" name="type">
+                    <option value="">---</option>
+                    <option value="mainCourse">Main Course</option>
+                    <option value="sideDish">Side Dish</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="appetizer">Appetizer</option>
+                    <option value="salad">Salad</option>
+                    <option value="bread">Bread</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="soup">Soup</option>
+                    <option value="beverage">Beverage</option>
+                    <option value="sauce">Sauce</option>
+                    <option value="marinade">Marinade</option>
+                    <option value="fingerfood">Fingerfood</option>
+                    <option value="snack">Snack</option>
+                    <option value="drink">Drink</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="diet">Select a diet:</label>
+                <select id="diet" name="diet">
+                    <option value="">---</option>
+                    <option value="ketogenic">Ketogenic</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="pescetarian">Pescetarian</option>
+                    <option value="paleo">Paleo</option>
+                    <option value="primal">Primal</option>
+                    <option value="whole30">Whole30</option>
+                </select>
+            </div>
+            <br>
+            <input type="submit" id="Search" value="Search Recipes" class="btn btn-primary"/>
         </form> 
     </div>
 </main>

@@ -1,26 +1,53 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/"></a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <img src="../images/chefitup.png" alt="Chef it Up!"/>
+          <img src="CSCI3308-Project/All Project code/src/views/images/chefitup.jpg" alt="Chef it Up!"/>
         </li>
         <li class="nav-item">
-          <!-- TO-DO: For 'Home', Add a <a> tag with an attribute href to call the '/' API that navigates to home page if logged in, or login page if not -->
             <a class="nav-link" href="/home"> Home</a>
         </li>
         <li class="nav-item">
-          <!-- TO-DO: For 'Home', Add a <a> tag with an attribute href to call the '/' API that navigates to home page if logged in, or login page if not -->
             <a class="nav-link" href="/profile"> My Recipes</a>
         </li>
         <li class="nav-item">
-          <!-- TO-DO: For 'Home', Add a <a> tag with an attribute href to call the '/' API that navigates to home page if logged in, or login page if not -->
             <a class="nav-link" href="/about"> About</a>
         </li>
         <li class="nav-item">
-          <!-- TO-DO: For 'Home', Add a <a> tag with an attribute href to call the '/' API that navigates to home page if logged in, or login page if not -->
             <a class="nav-link" href="/login"> Logout</a>
         </li>
       </ul>
-    </nav>
+    </nav>-->
+    <nav class="navbar navbar-expand-lg bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-bg-dark" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item" >
+              <a class="nav-link active btn-close-white mb-0 h1" aria-current="page" id = "Tabs" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active btn-close-white mb-0 h1" id = "Tabs" href="/profile">My Recipes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active btn-close-white mb-0 h1" id = "Tabs" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active btn-close-white mb-0 h1" id = "Tabs" href="/login">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <nav class="navbar bg-dark">
+          <div class="container">
+            <a class="navbar-brand ml-auto btn-close-white" href="#">
+              <img src="src/views/images/chefitup.jpg" alt="Chef It Up Logo" class="d-inline-block align-text-right">
+            </a>
+          </div>
+        </nav>
+  </nav>
   </header>

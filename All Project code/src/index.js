@@ -176,7 +176,7 @@ app.get("/discover", (req, res) => {
       cuisine: req.query.cuisine,
       type: req.query.type,
       diet: req.query.diet,
-      size: 12// you can choose the number of events you would like to return
+      number: 12 // you can choose the number of events you would like to return
     },
   })
     .then(results => {

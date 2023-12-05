@@ -94,7 +94,9 @@ app.post("/register", async (req, res) => {
 
     })
     .catch((error) => {
-      res.redirect("/register");
+      res.render("pages/register", {
+        message: "Username already exists.",
+      });
       // res.json({ status: 'Invalid input', message: 'Invalid input'});
     });
   });
@@ -111,7 +113,9 @@ app.post("/login", async (req, res) => {
     const data = await db.query(query, username);
     
     if(data.length === 0){
-      return res.redirect("/register");
+      return res.render("pages/login", {
+        message: "Account not found.",
+      });
       // return res.json({ status: 'Invalid input', message: 'Invalid input'});
     }
     user = data[0];

@@ -100,8 +100,6 @@ app.post("/register", async (req, res) => {
     db.query(query, [username, hash])
     .then(() => {
       res.redirect("/login");
-      // res.json({ status: 'Success', message: 'Success'});
-
     })
     .catch((error) => {
       res.render("pages/register", {
@@ -145,7 +143,6 @@ app.post("/login", async (req, res) => {
     //save user details in session like in lab 8
     req.session.user = user;
     req.session.save();
-    // res.json({ status: 'Success', message: 'Success'});
     res.redirect("/home");
   } 
   catch(error){
@@ -191,7 +188,7 @@ app.get("/discover", (req, res) => {
       type: req.query.type,
       diet: req.query.diet,
       sort: "calories",
-      number: 12 // you can choose the number of events you would like to return
+      number: 16 // you can choose the number of events you would like to return
     },
   })
     .then(results => {
@@ -201,13 +198,11 @@ app.get("/discover", (req, res) => {
           message: "No recipes matched your search",
           results: [],
         })
-        // return res.json({ status: 'Invalid input', message: 'Invalid input'});
       }
       res.render("pages/filter",{
         results : results.data.results,
         action: req.query.taken ? "delete" : "add",
       });
-      // res.json({ status: 'Success', message: 'Success'});
     })
     .catch(error => {
       // Handle errors
@@ -215,7 +210,6 @@ app.get("/discover", (req, res) => {
         message: "No recipes matched your search",
         results: [],
       });
-      // res.json({ status: 'Invalid input', message: 'Invalid input'});
     });
 });
 

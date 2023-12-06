@@ -57,6 +57,13 @@ app.use(
   })
 );
 
+// const saved_recipes = `
+//   SELECT DISTINCT
+//     result.title,
+//     result.image
+//   FROM 
+//     saved_recipes`;
+
 // *****************************************************
 // <!-- Section 4 : API Routes -->
 // *****************************************************
@@ -186,7 +193,8 @@ app.get("/discover", (req, res) => {
     .then(results => {
       console.log(results.data.results); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
       res.render("pages/filter",{
-        results : results.data.results
+        results : results.data.results,
+        action: req.query.taken ? "delete" : "add",
       });
     })
     .catch(error => {
@@ -194,6 +202,58 @@ app.get("/discover", (req, res) => {
       res.render("pages/filter",{
         message: "No recipes matched your search",
         results: [],
+      });
+    });
+});
+
+
+app.post("/recipe/add", (req, res) => {
+  db.tx(async (t) => {
+    await t.none(
+      "INSERT INTO saved_recipes(title, image) VALUES ($1, $2);",
+      [req.body.title, req.body.image]
+    );
+  })
+    .then((results) => {
+      //console.info(courses);
+      res.render("pages/filter", {
+        results,
+        message: `Successfully added recipe ${req.body.title}`,
+        action: "add",
+      });
+    })
+    .catch((err) => {
+      res.render("pages/filter", {
+        results: [],
+        error: true,
+        message: err.message,
+      });
+    });
+});
+
+app.post("/recipe/delete", (req, res) => {
+  db.task("delete-recipe", (task) => {
+    return task.batch([
+      task.none(
+        `DELETE FROM saved_recipes WHERE title = $1;`,
+        [req.body.title]
+      ),
+      task.any(saved_recipes),
+    ]);
+  })
+    .then(([, results]) => {
+      console.info(filter);
+      res.render("pages/filter", {
+        results,
+        message: `Successfully removed recipe ${req.body.title}`,
+        action: "delete",
+      });
+    })
+    .catch((err) => {
+      res.render("pages/filter", {
+        results: [],
+        error: true,
+        message: err.message,
       });
     });
 });

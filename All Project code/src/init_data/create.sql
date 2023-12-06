@@ -12,3 +12,9 @@ CREATE TABLE users(
     username VARCHAR(50) PRIMARY KEY,
     password CHAR(60) NOT NULL
 );
+
+DROP TABLE IF EXISTS saved_recipes CASCADE;
+CREATE TABLE saved_recipes(
+    title VARCHAR(50),
+    image VARCHAR(100)
+);

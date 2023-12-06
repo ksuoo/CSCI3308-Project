@@ -4,17 +4,34 @@
 
 <main>
     <div class="container">
-      <div class="row">
-        <% results.forEach(function(result) { %> 
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="<%= result.image %>">
-                <div class="card-body">
-                  <h5 class="card-title"><%= result.title %> </h5>
+        <div class="row">
+            <% results.forEach(function(result) { %> 
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="<%= result.image %>">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= result.title %> </h5>
+                    </div>
+                    <!-- <% if (locals.action === 'delete') { %>
+                        <form action="/recipe/delete" method="POST">
+                            <input type='hidden' name="title" value="<%- result.title %>">
+                            <input type='hidden' name="image" value="<%- result.image %>">
+                            <button class="btn btn-outline-danger" type="submit">DELETE</button>
+                        </form>
+                    <% } else { %>
+                        <form action="/recipe/add" method="POST">
+                            <input type='hidden' name="title" value="<%- result.title %>">
+                            <input type='hidden' name="image" value="<%- result.image %>">
+                            <button class="btn btn-outline-success" type="submit" 
+                                <% if (result.taken === true) { %>
+                                    disabled 
+                                <% } %>
+                            >ADD</button>
+                        </form>
+                    <% } %> -->
                 </div>
-              </div>
-        <%})%>
+            <% }); %>
+        </div>
     </div>
-  </div>
 </main>
 
 <%- include ('../partials/footer') %>

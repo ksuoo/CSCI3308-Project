@@ -1,12 +1,12 @@
 <%- include ('../partials/header') %>
-<%- include ('../partials/menu') %>
 <%- include ('../partials/message') %>
 
 <main>
   <br><br>
+  <img src="/images/chefitup.jpg" class="mx-auto d-block">
     <div class="container">
       <div class="row justify-content-center align-items-center">
-        <div class="form-group col-md-4" style="background-color: #f4f4f4; padding: 50px; border-radius: 10px;" >
+        <div class="form-group col-md-4" style="background-color: #f4f4f4; padding: 50px; border-radius: 10px;">
             <form action="/login" method="POST">
                 <div class="mb-3">
                     <input class="form-control" type="text" autofocus autocomplete="off" id="name" name="name" placeholder="Username" required/>
@@ -15,7 +15,7 @@
                     <input class="form-control" type="password" id="password" name="password" placeholder="Password" required />
                 </div>
                 <div class="text-center mb-3">
-                    <input type="submit" id="login" value="Login" class="btn btn-primary px-5"/>
+                    <input type="submit" id="login" value="Login" class="btn btn-success px-5"/>
                 </div>
                 <p class="text-center"> Don't have an account? <a href="/register">Register</a></p>
             </form>

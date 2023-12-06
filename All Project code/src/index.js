@@ -107,7 +107,7 @@ app.post("/register", async (req, res) => {
       res.render("pages/register", {
         message: "Username already exists.",
       });
-      // res.json({ status: 'Invalid input', message: 'Invalid input'});
+      res.json({ status: 'Invalid input', message: 'Invalid input'});
     });
   });
 
@@ -122,11 +122,15 @@ app.post("/login", async (req, res) => {
   try{
     const data = await db.query(query, username);
     
+    if (username === ''){
+      res.json({ status: 'Invalid input', message: 'Invalid input'});
+      return;
+    }
     if(data.length === 0){
-      return res.render("pages/login", {
+      return res.render("pages/register", {
         message: "Account not found.",
       });
-      // return res.json({ status: 'Invalid input', message: 'Invalid input'});
+      return res.json({ status: 'Invalid input', message: 'Invalid input'});
     }
     user = data[0];
     // check if password from request matches with password in DB
@@ -135,20 +139,20 @@ app.post("/login", async (req, res) => {
       return res.render("pages/login", {
         message: "Incorrect username or passord.",
       });
-      // return res.json({ status: 'Invalid input', message: 'Invalid input'});
+      return res.json({ status: 'Invalid input', message: 'Invalid input'});
       
     }
     //save user details in session like in lab 8
     req.session.user = user;
     req.session.save();
-    res.redirect("/home");
     // res.json({ status: 'Success', message: 'Success'});
+    res.redirect("/home");
   } 
   catch(error){
     res.render("pages/register", {
       message: "Database request failed.",
     });
-    // res.json({ status: 'Invalid input', message: 'Invalid input'});
+    res.json({ status: 'Invalid input', message: 'Invalid input'});
   }
   });
 
@@ -172,13 +176,9 @@ app.get("/home", (req, res) => {
   res.render("pages/home");
 });
 
-app.get("/profile", (req, res) => {
-  res.render("pages/profile");
-});
-
 app.get("/discover", (req, res) => {
   axios({
-    url: `https://api.spoonacular.com/recipes/complexSearch?apiKey=a3d9272b711946149fef322a71c8343f`,
+    url: `https://api.spoonacular.com/recipes/complexSearch?apiKey=9d8ff4ce63134a19b2cb7c0875b6f208`,
     method: 'GET',
     dataType: 'json',
     headers: {
@@ -190,74 +190,32 @@ app.get("/discover", (req, res) => {
       cuisine: req.query.cuisine,
       type: req.query.type,
       diet: req.query.diet,
+      sort: "calories",
       number: 12 // you can choose the number of events you would like to return
     },
   })
     .then(results => {
       console.log(results.data.results); // the results will be displayed on the terminal if the docker containers are running // Send some parameters
+      if(results.data.results.length === 0){
+        return res.render("pages/home", {
+          message: "No recipes matched your search",
+          results: [],
+        })
+        // return res.json({ status: 'Invalid input', message: 'Invalid input'});
+      }
       res.render("pages/filter",{
         results : results.data.results,
         action: req.query.taken ? "delete" : "add",
       });
+      // res.json({ status: 'Success', message: 'Success'});
     })
     .catch(error => {
       // Handle errors
-      res.render("pages/filter",{
+      res.render("pages/home",{
         message: "No recipes matched your search",
         results: [],
       });
-    });
-});
-
-
-app.post("/recipe/add", (req, res) => {
-  db.tx(async (t) => {
-    await t.none(
-      "INSERT INTO saved_recipes(title, image) VALUES ($1, $2);",
-      [req.body.title, req.body.image]
-    );
-  })
-    .then((results) => {
-      //console.info(courses);
-      res.render("pages/filter", {
-        results,
-        message: `Successfully added recipe ${req.body.title}`,
-        action: "add",
-      });
-    })
-    .catch((err) => {
-      res.render("pages/filter", {
-        results: [],
-        error: true,
-        message: err.message,
-      });
-    });
-});
-
-app.post("/recipe/delete", (req, res) => {
-  db.task("delete-recipe", (task) => {
-    return task.batch([
-      task.none(
-        `DELETE FROM saved_recipes WHERE title = $1;`,
-        [req.body.title]
-      ),
-      task.any(saved_recipes),
-    ]);
-  })
-    .then(([, results]) => {
-      console.info(filter);
-      res.render("pages/filter", {
-        results,
-        message: `Successfully removed recipe ${req.body.title}`,
-        action: "delete",
-      });
-    })
-    .catch((err) => {
-      res.render("pages/filter", {
-        results: [],
-        error: true,
-        message: err.message,
-      });
+      // res.json({ status: 'Invalid input', message: 'Invalid input'});
     });
 });
 

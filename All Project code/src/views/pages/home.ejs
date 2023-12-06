@@ -3,8 +3,11 @@
 <%- include ('../partials/message') %>
 
 <main>
-    <br><br>
+    <br>
     <div class="container">
+        <h1>Recipe Search</h1>
+        <br>
+        <h4>Select Filters:</h4>
         <form action="/discover" method="GET">
             <div class="mb-3">
                 <input class="form-control" type="text" autofocus autocomplete="off" id="query" name="query" placeholder="Keyword"/>
@@ -78,7 +81,7 @@
                 </select>
             </div>
             <br>
-            <input type="submit" id="Search" value="Search Recipes" class="btn btn-primary"/>
+            <input type="submit" id="Search" value="Search Recipes" class="btn btn-success"/>
         </form> 
     </div>
 </main>

@@ -94,7 +94,9 @@ app.post("/register", async (req, res) => {
 
     })
     .catch((error) => {
-      res.redirect("/register");
+      res.render("pages/register", {
+        message: "Username already exists.",
+      });
       // res.json({ status: 'Invalid input', message: 'Invalid input'});
     });
   });
@@ -111,7 +113,9 @@ app.post("/login", async (req, res) => {
     const data = await db.query(query, username);
     
     if(data.length === 0){
-      return res.redirect("/register");
+      return res.render("pages/login", {
+        message: "Account not found.",
+      });
       // return res.json({ status: 'Invalid input', message: 'Invalid input'});
     }
     user = data[0];
@@ -127,7 +131,7 @@ app.post("/login", async (req, res) => {
     //save user details in session like in lab 8
     req.session.user = user;
     req.session.save();
-    res.redirect("/discover");
+    res.redirect("/home");
     // res.json({ status: 'Success', message: 'Success'});
   } 
   catch(error){
@@ -172,10 +176,11 @@ app.get("/discover", (req, res) => {
     },
     params: {
       apikey: process.env.API_KEY,
-      query: req.body.query,
-      cuisine: req.body.cuisine,
-      type: req.body.type,
-      size: 10// you can choose the number of events you would like to return
+      query: req.query.query,
+      cuisine: req.query.cuisine,
+      type: req.query.type,
+      diet: req.query.diet,
+      number: 12 // you can choose the number of events you would like to return
     },
   })
     .then(results => {

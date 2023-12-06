@@ -39,8 +39,11 @@ db.connect()
 // <!-- Section 3 : App Settings -->
 // *****************************************************
 
+
 app.set('view engine', 'ejs'); // set the view engine to EJS
 app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
+
+app.use(express.static('public'));
 
 // initialize session variables
 app.use(

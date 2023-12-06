@@ -1,13 +1,13 @@
-# Chefitup - CSCI3308 Project
+# Chef It Up - CSCI3308 Project
+
+## Description
+**Chef It Up** is a culinary application that effortlessly connects users with a vast array of recipes tailored to their preferences. Just by inputting minimal information, users can explore a plethora of recipes suited to their current culinary desires.
 
 ## Contributors
-- Charan
-- Bianca
-- Kaile
-- Zach
-
-## Introduction
-**Chefitup** is a culinary application that effortlessly connects users with a vast array of recipes tailored to their preferences. Just by inputting minimal information, users can explore a plethora of recipes suited to their current culinary desires.
+- Kaile Suoo
+- Charan Sai Kakula
+- Bianca Gautam
+- Zach Erdley
 
 ## Technology Stack
 - **Front-End**: EJS (Embedded JavaScript Templating)
@@ -18,7 +18,6 @@
 - **Containerization**: Docker to ensure consistent environments
 
 ## Prerequisites
-- A computer with internet connectivity
 - Docker installed for containerization
 - Application codebase downloaded to the computer
 
@@ -41,10 +40,13 @@
 
 ## Testing
 - Tests are automatically executed when you run the Docker commands.
-- Ensure all tests pass for optimal functionality.
+- Test cases for register, login, and filtering recipes.
+- Register: Enter a username and password, if the username has already been taken, the application will send an error message and ask you to input a new one
+- Login: Sign in with the account that was just created. If the account is not found, the website will redirect you to the register page to create one
+- Discover: Enter filters to search for recipes. If there are no recipes that match your search, and error message will pop up.
 
 ## Deployed Application
-Access the live application here: [Chefitup Live](http://recitation-11-team-04.eastus.cloudapp.azure.com:3000/)
+Access the live application here: [Chef It Up Live](http://recitation-11-team-04.eastus.cloudapp.azure.com:3000/)
 
 ## Usage
 1. **Account Registration**: Sign up for a new account and log in.

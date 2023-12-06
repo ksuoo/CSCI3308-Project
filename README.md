@@ -40,7 +40,7 @@
 
 ## Testing
 - Tests are automatically executed when you run the Docker commands.
-- Test cases for register, login, and filtering recipes.
+- Test cases for register, login, and filtering recipes can be found in server.spec.js
 - Register: Enter a username and password, if the username has already been taken, the application will send an error message and ask you to input a new one
 - Login: Sign in with the account that was just created. If the account is not found, the website will redirect you to the register page to create one
 - Discover: Enter filters to search for recipes. If there are no recipes that match your search, and error message will pop up.

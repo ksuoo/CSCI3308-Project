@@ -10,13 +10,16 @@ Kaile
 2. Link for each of the recipes
 3. Worked on presentation and project report and will complete
 
+
 Charan
 1. Worked on the footer and css
 2. Worked with Zach on CSS
 
+
 Zach
 1. Made the logo and worked on the logo
 2. Debugging for the CSS
+
 
 Bianca 
 1. Cybersecurity meeting for extra credit

@@ -6,11 +6,11 @@
     <div class="container">
         <div class="row">
             <% results.forEach(function(result) { %> 
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 16rem;">
                     <img class="card-img-top" src="<%= result.image %>">
                     <div class="card-body">
                         <h5 class="card-title"><%= result.title %> </h5>
-                        <a href="https://google.com/search?q=<%= result.title %>">Find Recipe</a>
+                        <a href="https://google.com/search?q=<%= result.title %>" target="_blank">Find Recipe</a>
                     </div>
                 </div>
             <% }); %>

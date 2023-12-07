@@ -187,8 +187,8 @@ app.get("/discover", (req, res) => {
       cuisine: req.query.cuisine,
       type: req.query.type,
       diet: req.query.diet,
-      sort: "calories",
-      number: 16 // you can choose the number of events you would like to return
+      sort: "meta-score",
+      number: 20 // you can choose the number of events you would like to return
     },
   })
     .then(results => {

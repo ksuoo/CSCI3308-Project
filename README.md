@@ -52,3 +52,8 @@ Access the live application here: [Chef It Up Live](http://recitation-11-team-04
 1. **Account Registration**: Sign up for a new account and log in.
 2. **Recipe Search**: On the homepage, use the filters to search for recipes.
 3. **Explore Recipes**: Browse through the filtered results and find a recipe that appeals to you.
+
+## Video Demo
+
+https://github.com/ksuoo/CSCI3308-Project/assets/111887544/a63b3810-9e2c-42b0-ad52-65ea5c444f39
+
